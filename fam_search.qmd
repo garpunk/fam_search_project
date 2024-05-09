@@ -1,0 +1,32 @@
+---
+title: "Family Search"
+format: html
+---
+
+```{python}
+from pytrends.request import TrendReq
+import matplotlib.pyplot as plt
+```
+
+```{python}
+# Create pytrends object
+pytrends = TrendReq()
+
+# Set up your search parameters
+kw_list = ["Anxiety", "Love", "Family", "loneliness"]
+pytrends.build_payload(kw_list, timeframe='today 5-y', geo='US')
+
+# Get the interest over time
+interest_over_time_df = pytrends.interest_over_time()
+
+print(interest_over_time_df)
+```
+```{python}
+plt.figure(figsize=(10, 6))
+interest_over_time_df.plot()
+plt.title('Google Trends - Interest Over Time')
+plt.xlabel('Date')
+plt.ylabel('Interest')
+plt.grid(True)
+plt.show()
+```
